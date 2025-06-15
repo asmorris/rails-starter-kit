@@ -20,6 +20,8 @@ export interface NavItem {
 export interface Flash {
   alert?: string
   notice?: string
+  success?: string
+  info?: string
 }
 
 export interface SharedData {

@@ -25,5 +25,11 @@ export const useFlash = () => {
     if (currentFlash.notice) {
       toast(currentFlash.notice)
     }
+    if (currentFlash.success) {
+      toast.success(currentFlash.success)
+    }
+    if (currentFlash.info) {
+      toast.info(currentFlash.success)
+    }
   }, [currentFlash])
 }
