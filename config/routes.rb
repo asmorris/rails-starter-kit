@@ -17,10 +17,20 @@ Rails.application.routes.draw do
   get :dashboard, to: "dashboard#index"
 
   namespace :settings do
+    get "/", to: "profiles#show"
     resource :profile, only: [:show, :update]
     resource :password, only: [:show, :update]
     resource :email, only: [:show, :update]
     resources :sessions, only: [:index]
+
+    # Billing
+    get :billing, to: "billing#index"
+    post "billing/checkout", to: "billing#create_checkout_session"
+    get "billing/checkout_success", to: "billing#checkout_success"
+    post "billing/manage", to: "billing#manage_subscription"
+    patch "billing/cancel", to: "billing#cancel_subscription"
+    patch "billing/pause", to: "billing#pause_subscription"
+    patch "billing/resume", to: "billing#resume_subscription"
   end
 
   inertia "settings/appearance" => "settings/appearance"
@@ -29,7 +39,7 @@ Rails.application.routes.draw do
   resources :posts, only: [:index, :create]
 
   # ActionCable
-  mount ActionCable.server => '/cable'
+  mount ActionCable.server => "/cable"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

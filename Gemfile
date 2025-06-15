@@ -83,3 +83,6 @@ end
 gem "pry", "~> 0.15.2"
 
 gem "pry-byebug", "~> 3.11"
+
+# Stripe for payments
+gem "stripe"

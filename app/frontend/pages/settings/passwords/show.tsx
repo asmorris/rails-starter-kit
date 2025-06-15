@@ -10,14 +10,7 @@ import { Label } from "@/components/ui/label"
 import AppLayout from "@/layouts/app-layout"
 import SettingsLayout from "@/layouts/settings/layout"
 import { settingsPasswordPath } from "@/routes"
-import type { BreadcrumbItem } from "@/types"
-
-const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: "Password settings",
-    href: settingsPasswordPath(),
-  },
-]
+import { useBreadcrumbs } from "@/hooks/use-breadcrumbs"
 
 interface PasswordForm {
   password_challenge: string
@@ -28,6 +21,7 @@ interface PasswordForm {
 export default function Password() {
   const passwordInput = useRef<HTMLInputElement>(null)
   const currentPasswordInput = useRef<HTMLInputElement>(null)
+  const breadcrumbs = useBreadcrumbs()
 
   const { data, setData, errors, put, reset, processing, recentlySuccessful } =
     useForm<Required<PasswordForm>>({

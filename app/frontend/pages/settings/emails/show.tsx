@@ -10,14 +10,8 @@ import { Label } from "@/components/ui/label"
 import AppLayout from "@/layouts/app-layout"
 import SettingsLayout from "@/layouts/settings/layout"
 import { identityEmailVerificationPath, settingsEmailPath } from "@/routes"
-import type { BreadcrumbItem, SharedData } from "@/types"
-
-const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: "Email settings",
-    href: settingsEmailPath(),
-  },
-]
+import type { SharedData } from "@/types"
+import { useBreadcrumbs } from "@/hooks/use-breadcrumbs"
 
 interface EmailForm {
   password_challenge: string
@@ -26,6 +20,7 @@ interface EmailForm {
 
 export default function Email() {
   const currentPasswordInput = useRef<HTMLInputElement>(null)
+  const breadcrumbs = useBreadcrumbs()
 
   const { auth } = usePage<SharedData>().props
   const {

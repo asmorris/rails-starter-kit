@@ -15,15 +15,8 @@ import {
 import { useActionCable } from "@/hooks/use-actioncable"
 import AppLayout from "@/layouts/app-layout"
 import { postsPath } from "@/routes"
-import type { BreadcrumbItem } from "@/types"
 import { toast } from "sonner"
-
-const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: "Posts",
-    href: postsPath(),
-  },
-]
+import { useBreadcrumbs } from "@/hooks/use-breadcrumbs"
 
 interface Post {
   id: number
@@ -41,6 +34,7 @@ interface PostsProps {
 }
 
 export default function Posts({ posts: initialPosts }: PostsProps) {
+  const breadcrumbs = useBreadcrumbs()
   const [posts, setPosts] = useState<Post[]>(initialPosts || [])
 
   const form = useForm({

@@ -11,14 +11,8 @@ import { Label } from "@/components/ui/label"
 import AppLayout from "@/layouts/app-layout"
 import SettingsLayout from "@/layouts/settings/layout"
 import { settingsProfilePath } from "@/routes"
-import type { BreadcrumbItem, SharedData } from "@/types"
-
-const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: "Profile settings",
-    href: settingsProfilePath(),
-  },
-]
+import type { SharedData } from "@/types"
+import { useBreadcrumbs } from "@/hooks/use-breadcrumbs"
 
 interface ProfileForm {
   name: string
@@ -26,6 +20,7 @@ interface ProfileForm {
 
 export default function Profile() {
   const { auth } = usePage<SharedData>().props
+  const breadcrumbs = useBreadcrumbs()
 
   const { data, setData, patch, errors, processing, recentlySuccessful } =
     useForm<Required<ProfileForm>>({

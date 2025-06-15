@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_14_211359) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_15_023041) do
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "title"
@@ -36,6 +36,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_14_211359) do
     t.boolean "verified", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_customer_id"
+    t.string "stripe_subscription_id"
+    t.string "subscription_status"
+    t.datetime "subscription_current_period_end"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
