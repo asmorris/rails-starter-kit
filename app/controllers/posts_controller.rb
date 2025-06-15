@@ -24,6 +24,7 @@ class PostsController < InertiaController
     @post.user = Current.user
     if @post.save
       flash[:success] = "Post created!"
+      TestJob.perform_later(user: Current.user)
       redirect_to posts_path
     else
       render :index
