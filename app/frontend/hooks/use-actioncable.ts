@@ -1,14 +1,17 @@
-import { useEffect, useRef } from 'react'
-import { createConsumer } from '@rails/actioncable'
+import { useEffect, useRef } from "react"
+import { createConsumer } from "@rails/actioncable"
 
-export function useActionCable(channelName: string, onReceived: (data: any) => void) {
+export function useActionCable(
+  channelName: string,
+  onReceived: (data: any) => void,
+) {
   const consumerRef = useRef<any>(null)
   const subscriptionRef = useRef<any>(null)
 
   useEffect(() => {
     // Create consumer
     consumerRef.current = createConsumer()
-    
+
     // Subscribe to channel
     subscriptionRef.current = consumerRef.current.subscriptions.create(
       { channel: channelName },
@@ -19,8 +22,8 @@ export function useActionCable(channelName: string, onReceived: (data: any) => v
         },
         disconnected: () => {
           console.log(`Disconnected from ${channelName}`)
-        }
-      }
+        },
+      },
     )
 
     return () => {
@@ -36,6 +39,6 @@ export function useActionCable(channelName: string, onReceived: (data: any) => v
 
   return {
     consumer: consumerRef.current,
-    subscription: subscriptionRef.current
+    subscription: subscriptionRef.current,
   }
 }
